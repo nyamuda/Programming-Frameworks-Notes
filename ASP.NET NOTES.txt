@@ -1,0 +1,96 @@
+ASP.NET NOTES
+
+
+Entity Framework
+
+It saves data stored in the properties of business entities and also retrieves data from
+the database and converts it to business objects automatically.
+
+It creates an EDM(Entity Data Model) based on POCO(Plain Old OLR Object) entities with get/set properties.
+It then uses this Model when querying or saving entity data to the database.
+
+
+In the Enity Framework, what is this class responsible  that interacts with your database and entities?
+
+Its called the DbContext
+It is the primary class responsible for interacting with the database.
+Its is responsible for:
+
+1.Querying: Converts LINQ-to-Entities queries to SQL query and sends them to the database.
+
+LINQ (Language Integrated Query) is uniform query syntax in C# and VB.NET to retrieve data 
+from different sources and formats. 
+
+For example, SQL is a Structured Query Language used to save and retrieve data from a database. 
+In the same way, LINQ is a structured query syntax built in C# and VB.NET to retrieve data 
+from different types of data sources such as collections, ADO.Net DataSet, XML Docs, web service 
+and MS SQL Server and other databases.
+
+Change Tracking: Keeps track of changes that occurred on the entities after querying from the database.
+Persisting Data: Performs the Insert, Update and Delete operations to the database, based on entity states.
+Caching: Provides first level caching by default. It stores the entities which have been 
+retrieved during the life time of a context class.
+Manage Relationship: Manages relationships using CSDL, MSL and SSDL in Db-First or Model-First approach, 
+and using fluent API configurations in Code-First approach.
+
+
+If a class inherits the DBContext class, then the class will be called a context class---->
+the class with be able to query the database and perform anything that can be done by the DBContext class.
+
+The context class in Entity Framework is a class which derives/inherits from System.Data.Entity.DBContext class
+
+
+The context class is used to query or save data to the database. 
+It is also used to configure domain classes, database related mappings, 
+change tracking settings, caching, transaction etc ---->> just like the DBContext.
+
+
+The following SchoolContext class is an example of a context class.
+
+using System.Data.Entity;
+
+public class SchoolContext : DbContext
+{
+    public SchoolContext()
+    {
+
+    }
+    // Entities        
+    public DbSet<Student> Students { get; set; }
+    public DbSet<StudentAddress> StudentAddresses { get; set; }
+    public DbSet<Grade> Grades { get; set; }
+}
+
+
+
+
+The DbSet class represents an entity set that can be used for create, read, update, and delete operations. 
+The context class (derived from DbContext ) must include the DbSet type properties for the entities which map to database tables and views.
+
+
+In the above example, the SchoolContext class is derived from DbContext, 
+which makes it a context class. It also includes an entity set for Student, 
+StudentAddress, and Grade entities.
+
+
+The way we can use the context to perform create, read, update, abd delete operations on our entities-->
+using the sets of the entities.
+HOW??
+the DbSet class provides all the methods that we can perfom on the sets.
+e.g
+
+METHODS
+Add(TEntity) --Adds the given entity to the context underlying the set (StdentContext in our cas) 
+in the Added state such that it will be inserted into the database when SaveChanges is called.
+
+
+GetType() --Gets the Type of the current instance.
+
+
+Remove(TEntity) --Marks the given entity as Deleted such that it will be 
+deleted from the database when SaveChanges is called. Note that the 
+entity must exist in the context in some other state before this method is called.
+
+
+
+

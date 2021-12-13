@@ -1,0 +1,8 @@
+Laravel
+
+Route::middleware('auth:sanctum')->get('/authenticated', function () {
+    return true;
+});
+
+the 'auth:sanctum' route will determine if the user is authentcated or not,
+if they are, the function will run.

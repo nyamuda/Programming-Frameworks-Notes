@@ -1,0 +1,19 @@
+1. importing the router in a store module
+import router from "../../../router";
+
+
+2. you can commit a an action or mutation in one store module from another store module
+
+
+3. making a modal 
+  <div
+            v-show="showModal"
+            class="fixed overflow-x-hidden overflow-y-auto flex items-center justify-center z-50 inset-0"
+        >
+            <!-- CONTENT OF THE MODAL -->
+            <slot name="modal-content"> </slot>
+        </div>
+        <div
+            v-show="showModal"
+            class="fixed inset-0 opacity-25 z-40 bg-black"
+        ></div>

@@ -1,0 +1,77 @@
+
+1. POST REQUEST
+
+ .post("/api/register", this.registerData)
+                .then(res => {
+                    console.log(res);
+
+                    this.registerData.first_name = "";
+                    this.registerData.second_name = "";
+                    this.registerData.email = "";
+                    this.registerData.password = "";
+                    this.registerData.password_confirmation = "";
+                })
+                .catch(error => {
+                    this.errorMessage = error.response.data.errors;
+                    console.log(error.response.data.errors.password[0]);
+                    console.error(error);
+                    this.hideSuccess();
+                });
+
+
+
+
+
+2. LOGIN ATHEN
+
+  $request->validate([
+            'email' => 'email|required',
+            'password' => 'required',
+            'is_admin' => 'required'
+        ],);
+
+        $credentials = $request->only('email', 'password', 'is_admin');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return  response()->json(Auth::user(), 200);
+        }
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+            'password' => ['The provided credentials are incorrect.']
+        ]);
+
+3. ADD TO THE DATABASE
+  User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+
+
+4. Create new instances first
+ $type1 = SurveyType::firstOrNew([
+            'question_type_name' => 'Multiple Choice'
+        ]);
+ $type1->save();
+
+
+5.Update Info In the database
+User::where('id', $request->id)
+            ->update([
+                'first_name' => $request->first_name,
+                'second_name' => $request->second_name,
+            ]);
+
+
+
+5. delete request
+frontend
+ deleteUser() {
+            //finally deleting the user -- module F
+            this.$store.dispatch("removeUser", {
+                params: { id: this.deleteUserWithID } //the second parameter must put in that ay.
+            });
+        },
+

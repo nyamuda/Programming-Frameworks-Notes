@@ -1,0 +1,81 @@
+TYPES OF TESING
+1.Unit --test a unit of an application without its external dependencies e.g database.
+/tests a class or multiples of classes without their external dependencies.
+-->they're cheap to write and execute fast.
+2.Integration-->test an application with its external dependencies.
+/tests a class or multiples of classes with their external dependencies.
+3.End-to-End
+
+What is Unit Testing?
+Its the code you write to test your code.
+Its testing the individual units or components of an application before you deploy your application.
+Purpose?
+To make sure each unit of the application works as expected.
+Benefits
+1. Test your code frequently, in less time.
+2. Catch the bugs before deploying
+3. Refractor your code with confidence.(Refactoring -->changing the the structure of your code without changing the functionality)
+
+It follows the following strategy
+1. Arrange -->set up the testing objects and prepare the prerequisites for your test.
+2. Act-->execute your code/
+3.Assert -->verify your result
+
+
+
+
+///notes from the spring boot website about testing your controllers
+Another useful approach is to not start the server at all but to test only the layer below that, 
+where Spring handles the incoming HTTP request and hands it off to your controller. 
+That way, almost of the full stack is used, and your code will be called in exactly the same way as 
+if it were processing a real HTTP request but without the cost of starting the server. 
+To do that, use Spring’s MockMvc and ask for that to be injected for you by using the 
+@AutoConfigureMockMvc annotation on the test case.
+
+//Thus we use the MockMVc when you want to test your controllers and don't want to start up the server.
+
+Mock-->is an object that replaces the real object of a class.
+-->you use a mock when you know the real object works perfectly fine.
+ALSO-->
+Why should we use a mock instead of a real service object in a test?
+Imagine a class has a dependency to a database or some other third-party system. 
+We don’t want to have our test run against the database. 
+If the database isn’t available, the test will fail even though our system under test might be completely bug-free. 
+The more dependencies we add in a test, the more reasons a test has to fail.
+If we use a mock instead, we can mock all those potential failures away.
+Aside from reducing failures, mocking also reduces our tests’ complexity and thus saves us some effort. 
+It takes a lot of boilerplate code to set up a whole network of correctly-initialized objects to be used in a test. 
+Using mocks, we only have to “instantiate” one mock instead of a whole rat-tail of objects the real object might need 
+to be instantiated.
+
+-->Mockito-->library used to create mocks
+
+to initialize a mock-->
+@MockBean
+private className variableName;
+
+
+STRUCTURE WHEN WRITING YOUR TEST
+
+@BeforeEach
+void setUp {
+}
+--->setup method will run before each test
+
+@AfterEach
+void tearDown() {
+}
+-->tear down will reun after each
+
+//given--set up your objects
+
+
+//when --execute the code,
+
+
+//assert/then-->verify what you expect
+
+
+
+
+
